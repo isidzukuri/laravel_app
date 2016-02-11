@@ -43,7 +43,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/admin">Home</a></li>
-            <li><a href="/pages">Pages</a></li>
+            <li><a href="/admin/pages">Pages</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -56,7 +56,10 @@
         </div> -->
 
         @if(Session::has('flash_message'))
-            <div class="alert alert-success"><%Session::get('flash_message')%></div> 
+            <div class="alert alert-<%Session::get('flash_message')['status']%> alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <%% Session::get('flash_message')['message'] %%>
+            </div>
         @endif
 
         @yield('content')
@@ -69,20 +72,18 @@
 
 
 
+
     
 
 
     <script type="text/javascript">
-    window.admin_data = {};
-    var angular_dependencies = [];
-    @yield('plain_js')
-    var admin_app = angular.module('adminApp', angular_dependencies); 
-
-    // app.controller('BasicCtrl', function($scope,$document) {
-    //     $scope.message = 'die u all smart bastards and chickens';
-
-    // });
+        window.admin_data = {};
+        var angular_dependencies = [];
+        @yield('plain_js')
+        var admin_app = angular.module('adminApp', angular_dependencies); 
     </script>
+    <script src='/js/angular/admin/row_in_list_controller.js'></script>
     @yield('js_footer')
+
 </body>
 </html>

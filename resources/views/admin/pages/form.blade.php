@@ -5,7 +5,15 @@
 @section('content')
 	@include("admin.{$controller_route_path}.menu")
 
-
+	@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li><% $error %></li>
+            @endforeach
+        </ul>
+    </div>
+	@endif
 	<div class="panel panel-primary"> 
 		<div class="panel-heading"> 
 			<h3 class="panel-title">Panel title</h3> 
@@ -36,17 +44,6 @@
 			</form>
 		</div> 
 	</div>
-	
-
-	@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li><% $error %></li>
-            @endforeach
-        </ul>
-    </div>
-	@endif
 @endsection
 
 
@@ -66,6 +63,6 @@
 @endsection
 
 @section('plain_js')
-	window.admin_data.text_editor = "<% isset($item) ? $item->text : "" %>";
+	window.admin_data.text_editor = '<%% isset($item) ? $item->text : "" %%>';
 	angular_dependencies.push('textAngular');
 @endsection

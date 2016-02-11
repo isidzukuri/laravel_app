@@ -17,12 +17,15 @@ class AdminController extends Controller
 	protected $controller_route_path = '';
 
     public function __construct(){
-    	$action_path = implode('/', array($this->path_prefix, $this->controller_route_path));
-		view()->share('action_path', $action_path);
+    	$this->action_path = implode('/', array($this->path_prefix, $this->controller_route_path));
+		view()->share('action_path', $this->action_path);
 		view()->share('controller_route_path', $this->controller_route_path);
 	}
 
-
+	protected function set_flash_message($status = 'success', $message = 'Saved!'){
+		session()->flash('flash_message', array('status' => $status,
+                                                'message'=> $message));
+	}
 
 	// public function __destruct(){
  //     print_r(DB::getQueryLog());

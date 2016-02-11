@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Page;
+use App\Http\Requests\PageRequest;
 
 
 class PageController extends AdminController
@@ -17,7 +18,7 @@ class PageController extends AdminController
     public function index()
     {
         $view = array();
-        $view['items'] = Page::orderBy('title','desc')->get();
+        $view['items'] = Page::orderBy('title','asc')->get();
         return view("admin.{$this->controller_route_path}.all", $view);
     }
 
@@ -37,21 +38,14 @@ class PageController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        //
+        $input = $request->all();
+        Page::create($input);
+        $this->set_flash_message();
+        return redirect($this->action_path);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -61,7 +55,7 @@ class PageController extends AdminController
      */
     public function edit($id)
     {
-        //
+        return view("admin.{$this->controller_route_path}.form", array('item' => Page::findOrFail($id)));
     }
 
     /**
@@ -71,9 +65,12 @@ class PageController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PageRequest $request, $id)
     {
-        //
+        $item = Page::findOrFail($id);
+        $item->update($request->all());
+        $this->set_flash_message();
+        return redirect($this->action_path);;
     }
 
     /**
@@ -84,11 +81,7 @@ class PageController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        Page::destroy($id);
     }
 
-
-    // public function __destruct(){
-    //  print_r(DB::getQueryLog());
-    // }
 }

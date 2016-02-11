@@ -1,3 +1,18 @@
 .admin_content{
 	padding-top: 60px;
 }
+.items_list .row, .items_list .row span{
+	line-height: 40px;
+}
+.items_list .row{
+	cursor: pointer;
+}
+.items_list .row:nth-child(even){
+  background-color: #fff;
+}
+.items_list .row:nth-child(odd){
+  background-color: #F1F6FB;
+}
+.items_list .row:hover{
+	background-color: #DFF0D8;
+}
