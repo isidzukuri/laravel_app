@@ -63,6 +63,6 @@
 @endsection
 
 @section('plain_js')
-	window.admin_data.text_editor = '<%% isset($item) ? $item->text : "" %%>';
+	window.admin_data.text_editor = <%% isset($item) ? json_encode($item->text) : "''" %%>;
 	angular_dependencies.push('textAngular');
 @endsection

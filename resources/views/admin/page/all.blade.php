@@ -20,5 +20,5 @@
 			@endforeach
 		</div>
 	</div>
-	
+	<%% $items->links() %%>
 @endsection

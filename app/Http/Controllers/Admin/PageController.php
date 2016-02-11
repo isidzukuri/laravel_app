@@ -8,7 +8,7 @@ use App\Http\Requests\PageRequest;
 class PageController extends AdminController
 {
 
-    protected $controller_route_path = 'pages';
+    protected $controller_route_path = 'page';
 
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class PageController extends AdminController
     public function index()
     {
         $view = array();
-        $view['items'] = Page::orderBy('title','asc')->get();
+        $view['items'] = Page::orderBy('title','asc')->paginate(20);
         return view("admin.{$this->controller_route_path}.all", $view);
     }
 
