@@ -34,6 +34,12 @@ Route::get('/', function () {
 
 DB::connection()->enableQueryLog();
 
+
+
+
+Blade::setContentTags('<%', '%>');
+Blade::setRawTags('<%%', '%%>');
+
 Route::group(['middleware' => ['web']], function () {
 
     

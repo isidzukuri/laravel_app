@@ -3,30 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\One;
 use App\Http\Requests\OneValidation;
 
 // use Illuminate\Support\Facades\DB;
 
-// use Gate;
-
 class AdminController extends Controller
 {
    
-    // public function __destruct(){
-    //  print_r(DB::getQueryLog());
-    // }
+	protected $path_prefix = '/admin';
+
+	protected $controller_route_path = '';
+
+    public function __construct(){
+    	$action_path = implode('/', array($this->path_prefix, $this->controller_route_path));
+		view()->share('action_path', $action_path);
+		view()->share('controller_route_path', $this->controller_route_path);
+	}
 
 
-    public function index(){
-    	// Gate::denies('loged_user');
-    	One::all();
-    	// die('lol');
-    }
 
-
+	// public function __destruct(){
+ //     print_r(DB::getQueryLog());
+ //    }
    
 }

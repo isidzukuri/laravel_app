@@ -1,19 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use App\Page;
 
 
-use Illuminate\Support\Facades\DB;
-
-class PageController extends Controller
+class PageController extends AdminController
 {
+
+    protected $controller_route_path = 'pages';
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +16,9 @@ class PageController extends Controller
      */
     public function index()
     {
-        return 'index';
+        $view = array();
+        $view['items'] = Page::orderBy('title','desc')->get();
+        return view("admin.{$this->controller_route_path}.all", $view);
     }
 
     /**
@@ -31,7 +28,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.{$this->controller_route_path}.form");
     }
 
     /**
@@ -91,7 +88,7 @@ class PageController extends Controller
     }
 
 
-    public function __destruct(){
-     print_r(DB::getQueryLog());
-    }
+    // public function __destruct(){
+    //  print_r(DB::getQueryLog());
+    // }
 }
