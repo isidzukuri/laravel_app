@@ -34,6 +34,7 @@
             <li class="active"><a href="/admin">Home</a></li>
             <li><a href="/admin/page"><% trans("admin.page") %></a></li>
             <li><a href="/admin/post"><% trans("admin.post") %></a></li>
+            <li><a href="/admin/blog_tag"><% trans("admin.blog_tag") %></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

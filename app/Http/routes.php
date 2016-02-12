@@ -71,5 +71,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web
     Route::get('/', 'AdminController@index');
     Route::resource('page','PageController');
     Route::resource('post','PostController');
+    Route::resource('blog_tag','BlogTagController');
 });
 // dd(DB::getQueryLog());	

@@ -9,6 +9,7 @@ return array(
     'AddPages' => $baseDir . '/database/migrations/2016_02_10_231929_add_pages.php',
     'AddRoles' => $baseDir . '/database/migrations/2016_02_09_183452_AddRoles.php',
     'AddSeoNames2Pages' => $baseDir . '/database/migrations/2016_02_11_221441_add_seo_names_2_pages.php',
+    'CreateBlogTags' => $baseDir . '/database/migrations/2016_02_12_190430_create_blog_tags.php',
     'CreateMetaTags' => $baseDir . '/database/migrations/2016_02_08_140716_create_meta_tags.php',
     'CreateOnes' => $baseDir . '/database/migrations/2016_02_08_145000_create_ones.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',

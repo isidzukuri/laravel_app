@@ -23,7 +23,7 @@
 			<form class="form-horizontal" method='POST' action='<%isset($item) ? "{$action_path}/{$item->id}" : $action_path %>'>
 				<ul class="nav nav-tabs">
 				  <li class="active"><a data-toggle="tab" href="#general"><% trans("admin.General") %></a></li>
-				  <li><a data-toggle="tab" href="#meta_data"><% trans("admin.Meta_data") %></a></li>
+				  <!-- <li><a data-toggle="tab" href="#meta_data"><% trans("admin.Meta_data") %></a></li> -->
 				</ul>
 
 				<div class="tab-content">
@@ -36,55 +36,17 @@
 					  </div>
 
 					  <div class="form-group">
-					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Description") %></label>
-					    <div class="col-sm-10">
-					    	<textarea class="form-control" rows="3" maxlength="500" name="description"><% isset($item) ? $item->description : "" %></textarea>
-					    </div>
-					  </div>
-
-					  <div class="form-group">
-					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.text") %></label>
-					    <div class="col-sm-10" ng-controller="TextEditorController">
-					    	<div text-angular ng-model="htmlVariable" name="text"></div>
-					    </div>
-					  </div>
-
-					  <div class="form-group">
 					    <label for="inputEmail3" class="col-sm-2 control-label"><% trans("admin.Published") %></label>
 					    <div class="col-sm-10">
 					       <select class="form-control" name="published">
-							  <option value='0'><% trans("admin.no") %></option>
-							  <option value='1' <% isset($item) && $item->published ? "selected" : '' %>><% trans("admin.yes") %></option>
+							  <option value='1'><% trans("admin.yes") %></option>
+							  <option value='0' <% isset($item) && !$item->published ? "selected" : '' %>><% trans("admin.no") %></option>
 						   </select>
 
 					    </div>
 					  </div>
 				  </div>
 				  <div id="meta_data" class="tab-pane fade">
-				      
-				      <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label"><% trans("admin.Meta_title") %></label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" placeholder="<% trans("admin.Meta_title") %>" name="meta_title" value='<%isset($item) ? $item->meta_tag->meta_title : ""%>' maxlength="200" />
-					    </div>
-					  </div>
-
-					  <div class="form-group">
-					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Meta_description") %></label>
-					    <div class="col-sm-10">
-					    	<textarea class="form-control" rows="3" maxlength="200" name="meta_description"><% isset($item) ? $item->meta_tag->meta_description : "" %></textarea>
-					    </div>
-					  </div>
-
-					  <div class="form-group">
-					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Meta_keywords") %></label>
-					    <div class="col-sm-10">
-					    	<textarea class="form-control" rows="2" maxlength="200" name="meta_keywords"><% isset($item) ? $item->meta_tag->meta_keywords : "" %></textarea>
-					    </div>
-					  </div>
-
-
-
 				  </div>
 				</div>
 
@@ -102,4 +64,3 @@
 @endsection
 
 
-@include("admin.textangular")

@@ -3,6 +3,7 @@
 return [
     'page' => 'Page',
     'post' => 'Post',
+    'blog_tag' => 'Blog tag',
     'form' => 'form',
     'title' => 'Title',
     'text' => 'Text',
