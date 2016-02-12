@@ -12,4 +12,11 @@ class Post extends Model
 	
     protected $fillable = ['title', 'text', 'user_id', 'description', 'published'];
 
+    protected static function boot() {
+        parent::boot();
+        static::deleting(function($model) { 
+             $model->meta_tag()->delete();
+        });
+    }
+
 }
