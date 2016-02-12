@@ -41,7 +41,8 @@ class PostController extends AdminController
     {
         $input = $request->all();
         $input['user_id'] = $this->user->id;
-        Post::create($input);
+        $item = Post::create($input);
+        $item->meta_tag()->create($input);
         $this->set_flash_message();
         return redirect($this->action_path);
     }
@@ -55,7 +56,7 @@ class PostController extends AdminController
      */
     public function edit($id)
     {
-        return view("admin.{$this->controller_route_path}.form", array('item' => Post::findOrFail($id)));
+        return view("admin.{$this->controller_route_path}.form", array('item' => Post::with('meta_tag')->findOrFail($id)));
     }
 
     /**
@@ -67,8 +68,10 @@ class PostController extends AdminController
      */
     public function update(PostRequest $request, $id)
     {
+        $input = $request->all();
         $item = Post::findOrFail($id);
-        $item->update($request->all());
+        $item->update($input);
+        $item->meta_tag->update($input);
         $this->set_flash_message();
         return redirect($this->action_path);
     }

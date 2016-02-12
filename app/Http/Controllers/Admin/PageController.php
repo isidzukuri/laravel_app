@@ -41,7 +41,8 @@ class PageController extends AdminController
     public function store(PageRequest $request)
     {
         $input = $request->all();
-        Page::create($input);
+        $item = Page::create($input);
+        $item->meta_tag()->create($input);
         $this->set_flash_message();
         return redirect($this->action_path);
     }
@@ -55,7 +56,7 @@ class PageController extends AdminController
      */
     public function edit($id)
     {
-        return view("admin.{$this->controller_route_path}.form", array('item' => Page::findOrFail($id)));
+        return view("admin.{$this->controller_route_path}.form", array('item' => Page::with('meta_tag')->findOrFail($id)));
     }
 
     /**
@@ -67,8 +68,10 @@ class PageController extends AdminController
      */
     public function update(PageRequest $request, $id)
     {
+        $input = $request->all();
         $item = Page::findOrFail($id);
-        $item->update($request->all());
+        $item->update($input);
+        $item->meta_tag->update($input);
         $this->set_flash_message();
         return redirect($this->action_path);
     }

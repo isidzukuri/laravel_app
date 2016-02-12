@@ -13,7 +13,7 @@
 
     <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="/js/angular.min.js" type="text/javascript"></script>
-    <script src="/js/ui-bootstrap-tpls-1.1.2.min.js" type="text/javascript"></script>
+    <!-- <script src="/js/ui-bootstrap-tpls-1.1.2.min.js" type="text/javascript"></script> -->
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     @yield('js')   
 </head>

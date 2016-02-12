@@ -12,4 +12,9 @@ return [
     'Published' => 'Published',
     'no' => 'no',
     'yes' => 'yes',
+    'General' => 'General',
+    'Meta_data' => 'Meta data', 
+    'Meta_keywords' => 'Meta keywords',
+    'Meta_title' => 'Meta title', 
+    'Meta_description' => 'Meta description', 
 ];
