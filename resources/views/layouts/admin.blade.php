@@ -15,18 +15,7 @@
     <script src="/js/angular.min.js" type="text/javascript"></script>
     <script src="/js/ui-bootstrap-tpls-1.1.2.min.js" type="text/javascript"></script>
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
-    @yield('js')
-
-    
-
-
-
-    <script type="text/javascript" src="js/controllers/basic.js"></script>
-    
-
-    
-
-   
+    @yield('js')   
 </head>
 <body ng-app="adminApp">
 
@@ -43,7 +32,8 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/admin">Home</a></li>
-            <li><a href="/admin/pages">Pages</a></li>
+            <li><a href="/admin/page"><% trans("admin.page") %></a></li>
+            <li><a href="/admin/post"><% trans("admin.post") %></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -84,6 +74,5 @@
     </script>
     <script src='/js/angular/admin/row_in_list_controller.js'></script>
     @yield('js_footer')
-
 </body>
 </html>

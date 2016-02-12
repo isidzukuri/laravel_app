@@ -70,5 +70,6 @@ Route::group(['middleware' => 'web'], function () {
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web','role:admin']], function () {
     Route::get('/', 'AdminController@index');
     Route::resource('page','PageController');
+    Route::resource('post','PostController');
 });
 // dd(DB::getQueryLog());	

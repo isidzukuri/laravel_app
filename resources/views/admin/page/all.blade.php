@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('meta_title', $controller_route_path)
+@section('meta_title', trans("admin.{$controller_route_path}"))
 
 @section('content')
 	@include("admin.{$controller_route_path}.menu")
 
 	<div class="panel panel-primary"> 
 		<div class="panel-heading"> 
-			<h3 class="panel-title"><% $controller_route_path %></h3> 
+			<h3 class="panel-title"><% trans("admin.{$controller_route_path}") %></h3> 
 		</div> 
 		<div class="container-fluid items_list" >
 	 		@foreach ($items as $key => $row)

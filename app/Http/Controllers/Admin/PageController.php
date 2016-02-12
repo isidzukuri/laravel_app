@@ -70,7 +70,7 @@ class PageController extends AdminController
         $item = Page::findOrFail($id);
         $item->update($request->all());
         $this->set_flash_message();
-        return redirect($this->action_path);;
+        return redirect($this->action_path);
     }
 
     /**

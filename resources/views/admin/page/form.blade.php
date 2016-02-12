@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('meta_title', $controller_route_path)
+@section('meta_title', trans("admin.{$controller_route_path}").' '.trans("admin.form"))
 
 @section('content')
 	@include("admin.{$controller_route_path}.menu")
@@ -16,18 +16,18 @@
 	@endif
 	<div class="panel panel-primary"> 
 		<div class="panel-heading"> 
-			<h3 class="panel-title">Panel title</h3> 
+			<h3 class="panel-title"><% trans("admin.{$controller_route_path}").' '.trans("admin.form") %></h3> 
 		</div> 
 		<div class="panel-body"> 
 			<form class="form-horizontal" method='POST' action='<%isset($item) ? "{$action_path}/{$item->id}" : $action_path %>'>
 			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+			    <label for="inputEmail3" class="col-sm-2 control-label"><% trans("admin.title") %></label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" placeholder="title" name="title" value='<%isset($item) ? $item->title : ""%>' />
+			      <input type="text" class="form-control" placeholder="<% trans("admin.title") %>" name="title" value='<%isset($item) ? $item->title : ""%>' maxlength="200" required />
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">Text</label>
+			    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.text") %></label>
 			    <div class="col-sm-10" ng-controller="TextEditorController">
 			    	<div text-angular ng-model="htmlVariable" name="text"></div>
 			    </div>
@@ -35,7 +35,7 @@
 			  
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      	<button type="submit" class="btn btn-primary">Save</button>
+			      	<button type="submit" class="btn btn-primary"><% trans("admin.save") %></button>
 			    </div>
 			  </div>
 
