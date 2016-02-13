@@ -59,6 +59,18 @@
 
 					    </div>
 					  </div>
+
+					  <div class="form-group">
+					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Tags") %></label>
+					    <div class="col-sm-10" ng-controller="SelectBoxController">
+							<select class="form-control attach_select_2" multiple="multiple" name="tags_list[]">
+							 	@foreach ($tags as $tag_id => $tag)
+					                <option value="<% $tag_id %>" <% isset($item) && in_array($tag_id, $tags_ids) ? "selected" : '' %>><% $tag %></option>
+					            @endforeach
+							</select>
+					    </div>
+					  </div>
+
 				  </div>
 				  <div id="meta_data" class="tab-pane fade">
 				      
@@ -83,8 +95,6 @@
 					    </div>
 					  </div>
 
-
-
 				  </div>
 				</div>
 
@@ -101,5 +111,5 @@
 	</div>
 @endsection
 
-
 @include("admin.textangular")
+@include("admin.select_box")

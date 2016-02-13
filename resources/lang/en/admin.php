@@ -18,4 +18,5 @@ return [
     'Meta_keywords' => 'Meta keywords',
     'Meta_title' => 'Meta title', 
     'Meta_description' => 'Meta description', 
+    'Tags' => 'Tags',
 ];

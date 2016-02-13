@@ -16,7 +16,7 @@ class CreateBlogTags extends Migration
             $table->increments('id');
             $table->string('title')->index();
             $table->string('seo')->unique();
-            $table->tinyInteger('published')->unsigned()->default(0);
+            $table->tinyInteger('published')->unsigned()->default(1);
         });
     }
 

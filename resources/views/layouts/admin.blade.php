@@ -8,8 +8,8 @@
     <title>@yield('meta_title')</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/css/admin.css" rel="stylesheet" type="text/css" />
     @yield('css')
+    <link href="/css/admin.css" rel="stylesheet" type="text/css" />
 
     <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="/js/angular.min.js" type="text/javascript"></script>

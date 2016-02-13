@@ -19,4 +19,12 @@ class Post extends Model
         });
     }
 
+    public function tags(){
+        return $this->belongsToMany('App\BlogTag');
+    }
+
+    public function sync_tags(array $ids){
+    	$ids = BlogTag::create_new_tags_if_exists($ids);
+        return $this->tags()->sync($ids);
+    }
 }

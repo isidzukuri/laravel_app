@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Post;
+use App\BlogTag;
 use App\Http\Requests\PostRequest;
 
 class PostController extends AdminController
@@ -27,8 +28,9 @@ class PostController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view("admin.{$this->controller_route_path}.form");
+    {   
+        $view = array('tags' => BlogTag::where('published',1)->lists('title','id'));
+        return view("admin.{$this->controller_route_path}.form", $view);
     }
 
     /**
@@ -43,10 +45,11 @@ class PostController extends AdminController
         $input['user_id'] = $this->user->id;
         $item = Post::create($input);
         $item->meta_tag()->create($input);
+        $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
+        $item->sync_tags($tags_ids);
         $this->set_flash_message();
         return redirect($this->action_path);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -56,7 +59,13 @@ class PostController extends AdminController
      */
     public function edit($id)
     {
-        return view("admin.{$this->controller_route_path}.form", array('item' => Post::with('meta_tag')->findOrFail($id)));
+        $item = Post::with('meta_tag', 'tags')->findOrFail($id);
+        $view = array(
+            'item' =>$item,
+            'tags' => BlogTag::where('published',1)->lists('title','id'),
+            'tags_ids' => $item->tags->lists('id')->toArray()
+            );
+        return view("admin.{$this->controller_route_path}.form", $view);
     }
 
     /**
@@ -72,6 +81,8 @@ class PostController extends AdminController
         $item = Post::findOrFail($id);
         $item->update($input);
         $item->meta_tag->update($input);
+        $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
+        $item->sync_tags($tags_ids);
         $this->set_flash_message();
         return redirect($this->action_path);
     }
