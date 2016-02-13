@@ -64,7 +64,7 @@
 
 
 
-    
+   <!-- dd(DB::getQueryLog())  --> 
 
 
     <script type="text/javascript">

@@ -3,7 +3,10 @@
 @section('meta_title', trans("admin.{$controller_route_path}"))
 
 @section('content')
+
 	@include("admin.{$controller_route_path}.menu")
+	@include("admin.list_autocomplete")
+	<div class="clearfix"></div>
 
 	<div class="panel panel-primary"> 
 		<div class="panel-heading"> 
@@ -22,3 +25,8 @@
 	</div>
 	<%% $items->links() %%>
 @endsection
+
+
+
+
+

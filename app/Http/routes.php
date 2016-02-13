@@ -70,7 +70,10 @@ Route::group(['middleware' => 'web'], function () {
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web','role:admin']], function () {
     Route::get('/', 'AdminController@index');
     Route::resource('page','PageController');
+    Route::get('post/autocomplete/{word}', 'PostController@autocomplete');
     Route::resource('post','PostController');
+
+
     Route::resource('blog_tag','BlogTagController');
 });
-// dd(DB::getQueryLog());	
+	

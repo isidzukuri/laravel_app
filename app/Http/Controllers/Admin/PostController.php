@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\BlogTag;
+use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 
 class PostController extends AdminController
@@ -15,10 +16,12 @@ class PostController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
         $view = array();
-        $view['items'] = Post::orderBy('title','asc')->paginate(20);
+        $items = Post::orderBy('title','asc');
+        $view['items'] = $search ? $items->where('title','LIKE', "{$search}%")->paginate(1000) : $items->paginate(20);
         return view("admin.{$this->controller_route_path}.all", $view);
     }
 
@@ -98,4 +101,14 @@ class PostController extends AdminController
         Post::destroy($id);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  string  $word
+     * @return json
+     */
+    public function autocomplete(string $word)
+    {
+        return Post::where('title','LIKE', "{$word}%")->get(['id', 'title']);
+    }
 }

@@ -4,6 +4,7 @@
 
 @section('content')
 	@include("admin.{$controller_route_path}.menu")
+	<div class="clearfix"></div>
 
 	@if ($errors->any())
     <div class="alert alert-danger">

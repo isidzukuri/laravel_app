@@ -4,6 +4,7 @@
 
 @section('content')
 	@include("admin.{$controller_route_path}.menu")
+	<div class="clearfix"></div>
 
 	<div class="panel panel-primary"> 
 		<div class="panel-heading"> 

@@ -1,5 +1,5 @@
 .admin_content{
-	padding-top: 60px;
+	padding-top: 80px;
 }
 .items_list .row, .items_list .row span{
 	line-height: 40px;
@@ -24,4 +24,11 @@
 }
 .ta-toolbar .btn-group{
 	margin-top: 10px;
+}
+.list_search{
+    width: auto;
+    padding: 0;
+}
+.list_buttons_menu{
+	margin-bottom: 10px;
 }
