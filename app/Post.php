@@ -10,7 +10,7 @@ class Post extends Model
 {
 	use UniqueSeoNameModel, MetaTagedModel;
 	
-    protected $fillable = ['title', 'text', 'user_id', 'description', 'published'];
+    protected $fillable = ['title', 'text', 'user_id', 'description', 'published', 'img_ext'];
 
     protected static function boot() {
         parent::boot();

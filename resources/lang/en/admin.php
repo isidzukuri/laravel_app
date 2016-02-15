@@ -20,4 +20,10 @@ return [
     'Meta_description' => 'Meta description', 
     'Tags' => 'Tags',
     'search' => 'search',
+    'select_files' => 'Select Files',
+    'Files' => 'Files',
+    'crop' => 'crop',
+    'select_picture' => 'select picture',
+    'Picture' => 'Picture',
+    
 ];

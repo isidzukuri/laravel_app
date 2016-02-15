@@ -6,6 +6,14 @@ use App\BlogTag;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 
+
+// use Storage;
+// use ReflectionClass;
+// use ReflectionMethod;
+// use League\Flysystem\Adapter\Local;
+use File;
+use Image;
+
 class PostController extends AdminController
 {
 
@@ -81,6 +89,23 @@ class PostController extends AdminController
     public function update(PostRequest $request, $id)
     {
         $input = $request->all();
+
+        // dd($input);
+        // $input['croped_coords']
+
+        foreach ($input['croped_images'] as $key => $image) {
+            $temp_path = public_path("images/{$this->controller_route_path}/temp/{$image}");
+            $ext = File::extension($temp_path);
+            $img_name = 'original.'.$ext;
+            $post_path = public_path("images/{$this->controller_route_path}/{$id}/");
+            $this->add_directory_if_not_exist($post_path);
+            File::move($temp_path, $post_path.$img_name);
+            $input['img_ext'] = File::extension($temp_path);
+        }
+
+
+die;
+
         $item = Post::findOrFail($id);
         $item->update($input);
         $item->meta_tag->update($input);
@@ -99,6 +124,7 @@ class PostController extends AdminController
     public function destroy($id)
     {
         Post::destroy($id);
+        File::deleteDirectory(public_path("images/{$this->controller_route_path}/{$id}/"));
     }
 
     /**
@@ -111,4 +137,7 @@ class PostController extends AdminController
     {
         return Post::where('title','LIKE', "{$word}%")->get(['id', 'title']);
     }
+
+
+    
 }

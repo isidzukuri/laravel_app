@@ -72,6 +72,13 @@
 					    </div>
 					  </div>
 
+					  <div class="form-group">
+					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Picture") %></label>
+					    <div class="col-sm-10">
+							@include("admin.crop")
+					    </div>
+					  </div>
+
 				  </div>
 				  <div id="meta_data" class="tab-pane fade">
 				      

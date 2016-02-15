@@ -72,6 +72,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web
     Route::resource('page','PageController');
     Route::get('post/autocomplete/{word}', 'PostController@autocomplete');
     Route::resource('post','PostController');
+    Route::post('post/upload_img_file', 'PostController@upload_img_file');
 
 
     Route::resource('blog_tag','BlogTagController');

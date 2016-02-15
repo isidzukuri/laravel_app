@@ -32,3 +32,16 @@
 .list_buttons_menu{
 	margin-bottom: 10px;
 }
+.adm_progress{
+	margin-bottom: 10px;
+}
+.crop_preview{
+	margin: 20px 20px 20px 0;
+}
+.cropArea {
+    background: #fff;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+    margin: 20px 20px 20px 0;
+}
