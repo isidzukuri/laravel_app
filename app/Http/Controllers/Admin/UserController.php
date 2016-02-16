@@ -1,26 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Post;
-use App\BlogTag;
+use App\User;
+use App\Role;
 use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\UserRequest;
 
 
-// use Storage;
-// use ReflectionClass;
-// use ReflectionMethod;
-// use League\Flysystem\Adapter\Local;
-use File;
-use Image;
-use App\Traits\ProcessImagesController;
-
-class PostController extends AdminController
+class UserController extends AdminController
 {
 
-    use ProcessImagesController;
-
-    protected $controller_route_path = 'post';
+    protected $controller_route_path = 'user';
 
     /**
      * Display a listing of the resource.
@@ -31,8 +21,8 @@ class PostController extends AdminController
     {
         $search = $request->get('search');
         $view = array();
-        $items = Post::orderBy('title','asc');
-        $view['items'] = $search ? $items->where('title','LIKE', "{$search}%")->paginate(1000) : $items->paginate(20);
+        $items = User::orderBy('email','asc');
+        $view['items'] = $search ? $items->where('email','LIKE', "{$search}%")->paginate(1000) : $items->paginate(20);
         return view("admin.{$this->controller_route_path}.all", $view);
     }
 
@@ -43,7 +33,7 @@ class PostController extends AdminController
      */
     public function create()
     {   
-        $view = array('tags' => BlogTag::where('published',1)->lists('title','id'));
+        $view = array('roles' => Role::lists('title','id'));
         return view("admin.{$this->controller_route_path}.form", $view);
     }
 
@@ -53,15 +43,12 @@ class PostController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostRequest $request)
+    public function store(UserRequest $request)
     {
         $input = $request->all();
-        $input['user_id'] = $this->user->id;
-        $item = Post::create($input);
-        $item = $this->process_images($item, $input); 
-        $item->meta_tag()->create($input);
-        $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
-        $item->sync_tags($tags_ids);
+        $item = User::create($input); 
+        $roles_ids = isset($input['roles_list']) ? $input['roles_list'] : array();
+        $item->sync_roles($roles_ids);
         $this->set_flash_message();
         return redirect($this->action_path);
     }
@@ -74,11 +61,11 @@ class PostController extends AdminController
      */
     public function edit($id)
     {
-        $item = Post::with('meta_tag', 'tags')->findOrFail($id);
+        $item = User::with('roles')->findOrFail($id);
         $view = array(
-            'item' =>$item,
-            'tags' => BlogTag::where('published',1)->lists('title','id'),
-            'tags_ids' => $item->tags->lists('id')->toArray()
+            'item' => $item,
+            'roles' => Role::lists('title','id'),
+            'roles_ids' => $item->roles->lists('id')->toArray()
             );
         return view("admin.{$this->controller_route_path}.form", $view);
     }
@@ -90,15 +77,18 @@ class PostController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $input = $request->all();
-        $item = Post::findOrFail($id);
-        $item = $this->process_images($item, $input);  
-        $item->update($input);      
-        $item->meta_tag->update($input);
-        $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
-        $item->sync_tags($tags_ids);
+        $item = User::findOrFail($id); 
+        if($input['password'] == ''){
+            unset($input['password']);
+        }else{
+            $input['password'] = bcrypt($input['password']);
+        }
+        $item->update($input);
+        $roles_ids = isset($input['roles_list']) ? $input['roles_list'] : array();
+        $item->sync_roles($roles_ids);
         $this->set_flash_message();
         return redirect($this->action_path);
     }
@@ -111,8 +101,7 @@ class PostController extends AdminController
      */
     public function destroy($id)
     {
-        Post::destroy($id);
-        File::deleteDirectory(public_path("images/{$this->controller_route_path}/{$id}/"));
+        User::destroy($id);
     }
 
     /**
@@ -123,7 +112,7 @@ class PostController extends AdminController
      */
     public function autocomplete(string $word)
     {
-        return Post::where('title','LIKE', "{$word}%")->get(['id', 'title']);
+        return User::where('email','LIKE', "{$word}%")->get(['id', 'email as title']);
     }
 
 

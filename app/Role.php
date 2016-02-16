@@ -24,4 +24,11 @@ class Role extends Model
     {
         return $this->users()->detach($id);
     }
+
+    public static function create_new_roles_if_exists(array $ids){
+        foreach ($ids as $key => $id) {
+            if(!is_numeric($id)) $ids[$key] = Role::create(['title' => $id])->id;
+        }
+        return $ids;
+    }
 }

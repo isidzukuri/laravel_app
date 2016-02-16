@@ -9,15 +9,14 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     @yield('css')
-    <link href="/css/admin.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
 
     <script src="/js/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="/js/angular.min.js" type="text/javascript"></script>
-    <!-- <script src="/js/ui-bootstrap-tpls-1.1.2.min.js" type="text/javascript"></script> -->
     <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     @yield('js')   
 </head>
-<body ng-app="adminApp">
+<body ng-app="siteApp">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -31,14 +30,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li @if($controller_route_path == 'admin')class="active" @endif><a href="/admin">Home</a></li>
-            <li @if($controller_route_path == 'page')class="active" @endif><a href="/admin/page"><% trans("admin.page") %></a></li>
-            <li @if($controller_route_path == 'post')class="active" @endif><a href="/admin/post"><% trans("admin.post") %></a></li>
-            <li @if($controller_route_path == 'blog_tag')class="active" @endif><a href="/admin/blog_tag"><% trans("admin.blog_tag") %></a></li>
-            <li @if($controller_route_path == 'user')class="active" @endif><a href="/admin/user"><% trans("admin.Users") %></a></li>
+            <li ><a href="/admin">Home</a></li>
           </ul>
-
-          <p class="navbar-text navbar-right"><a href="/logout" class="navbar-link"><span class="glyphicon glyphicon-log-out" title='<% trans("admin.logout") %>'></span></a></p>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -71,12 +64,11 @@
 
 
     <script type="text/javascript">
-        window.admin_data = {};
+        window.site_data = {};
         var angular_dependencies = [];
         @yield('plain_js')
-        var admin_app = angular.module('adminApp', angular_dependencies); 
+        var site_app = angular.module('siteApp', angular_dependencies); 
     </script>
-    <script src='/js/angular/admin/row_in_list_controller.js'></script>
     @yield('js_footer')
 </body>
 </html>

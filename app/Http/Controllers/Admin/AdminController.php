@@ -18,7 +18,7 @@ class AdminController extends Controller
    
 	protected $path_prefix = '/admin';
 
-	protected $controller_route_path = '';
+	protected $controller_route_path = 'admin';
 
 	protected $user;
 
@@ -49,6 +49,12 @@ class AdminController extends Controller
         $file_name = str_random(15) . '.' . $file->getClientOriginalExtension();
         $file->move($destination_path, $file_name);
         return ['path' => $url_path, 'file_name' => $file_name];
+    }
+
+
+    public function admin()
+    {
+        return view("admin.{$this->controller_route_path}.index");
     }
 
 	// public function __destruct(){

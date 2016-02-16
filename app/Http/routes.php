@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Route::get('/one', 'OneController@one');
 
@@ -40,41 +38,51 @@ DB::connection()->enableQueryLog();
 Blade::setContentTags('<%', '%>');
 Blade::setRawTags('<%%', '%%>');
 
-Route::group(['middleware' => ['web']], function () {
+// Route::group(['middleware' => ['web']], function () {
 
     
 
-	// Route::get('/one', 'OneController@index');
-	// Route::get('/one/create', 'OneController@create');
-	// Route::get('/one/{id}', 'OneController@show');
-	// Route::post('/one', 'OneController@store');
+// 	// Route::get('/one', 'OneController@index');
+// 	// Route::get('/one/create', 'OneController@create');
+// 	// Route::get('/one/{id}', 'OneController@show');
+// 	// Route::post('/one', 'OneController@store');
 	
 	
 	
-	// Route::get('/one/all_json', 'OneController@all_json');
-	Route::resource('one','OneController');
+// 	// Route::get('/one/all_json', 'OneController@all_json');
+	
 
-// Route::controllers(array(
-// 			'one' => 'OneController'
-// 		));
+// // Route::controllers(array(
+// // 			'one' => 'OneController'
+// // 		));
 
-});
+// });
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/', 'HomeController@index');
+
+    // Route::get('/home', 'HomeController@index');
 });
 
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web','role:admin']], function () {
-    Route::get('/', 'AdminController@index');
+    Route::get('/', 'AdminController@admin');
     Route::resource('page','PageController');
+
+
     Route::get('post/autocomplete/{word}', 'PostController@autocomplete');
     Route::resource('post','PostController');
     Route::post('post/upload_img_file', 'PostController@upload_img_file');
 
-
     Route::resource('blog_tag','BlogTagController');
+
+
+    Route::get('user/autocomplete/{word}', 'UserController@autocomplete');
+    Route::resource('user','UserController');
+
+
+    
 });
 	

@@ -485,6 +485,7 @@ return array(
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PostTagsPivot' => $baseDir . '/database/migrations/2016_02_12_223137_post_tags_pivot.php',
+    'RemoveOnes' => $baseDir . '/database/migrations/2016_02_16_163613_RemoveOnes.php',
     'RenameMetaTagsColumns' => $baseDir . '/database/migrations/2016_02_12_175456_rename_meta_tags_columns.php',
     'RenameMetaTagsColumns2' => $baseDir . '/database/migrations/2016_02_12_175716_rename_meta_tags_columns_2.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',

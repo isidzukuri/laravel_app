@@ -27,4 +27,8 @@ class Post extends Model
     	$ids = BlogTag::create_new_tags_if_exists($ids);
         return $this->tags()->sync($ids);
     }
+
+    public static function get_few($limit = 3){
+        return Post::where('published',1)->orderBy('id','desc')->take($limit)->select('id','title','img_ext','description','seo')->get();
+    }
 }

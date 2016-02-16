@@ -39,4 +39,14 @@ class User extends Authenticatable
     public function has_role($title){
         return !$this->roles()->where('title',$title)->get()->isEmpty();
     }
+
+    public function sync_roles(array $ids){
+        $ids = Role::create_new_roles_if_exists($ids);
+        return $this->roles()->sync($ids);
+    }
+
+    // public function getTitleAttribute()
+    // {
+    //     return "{$this->email} {$this->name}";
+    // }
 }

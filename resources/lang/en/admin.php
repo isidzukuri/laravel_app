@@ -25,5 +25,14 @@ return [
     'crop' => 'crop',
     'select_picture' => 'select picture',
     'Picture' => 'Picture',
-    
+    'users' => 'users',
+    'Users' => 'Users',
+    'user' => 'user',
+    'name' => 'name',
+    'Name' => 'Name',
+    'Roles' => 'Roles',
+    'email' => 'email',
+    'admin' => 'admin',
+    'password' => 'password',
+    'logout' => 'logout',
 ];

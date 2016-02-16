@@ -43,6 +43,13 @@
 					  </div>
 
 					  <div class="form-group">
+					    <label for="inputEmail3" class="col-sm-2 control-label"><% trans("admin.password") %></label>
+					    <div class="col-sm-10">
+					      <input type="password" class="form-control" placeholder="<% trans("admin.password") %>" name="password" maxlength="200" />
+					    </div>
+					  </div>
+
+					  <div class="form-group">
 					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Roles") %></label>
 					    <div class="col-sm-10" ng-controller="SelectBoxController">
 							<select class="form-control attach_select_2" multiple="multiple" name="roles_list[]">
