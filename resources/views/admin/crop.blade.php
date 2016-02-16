@@ -30,7 +30,7 @@
                 image="picFile" 
                 result-image="croppedImage" 
                 ng-init="picFile='<% isset($item) && $item->img_ext ? "/images/post/{$item->id}/original.{$item->img_ext}" : '' %>'"
-                area-coords="AreaCoords">
+                area-coords="AreaCoords" >
               </img-crop>
           </div>
           <div class="pull-left crop_preview">
@@ -39,13 +39,13 @@
           <div class="clearfix"></div>
         </div>
         <span ng-if="picFile && !crop_pls" ng-click="crop_img()" class="btn btn-warning"><% trans("admin.crop") %></span>
-        <input type="hidden" name="croped_coords[]" value="{{AreaCoords}}" ng-if="crop_pls" />
-        <input type="hidden" name="croped_images[]" value="{{file.result.file_name}}" ng-if="file" />
-        <!--   -->
-        <!-- <span class="progress" ng-show="progress >= 0">
+        <input type="hidden" name="cropped_coords[]" value="{{real_coords}}" ng-if="crop_pls" />
+        <input type="hidden" name="cropped_images[]" value="{{file.result.file_name}}" ng-if="file" />
+        
+        <span class="progress" ng-show="progress >= 0">
           <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
         </span>
-        <span ng-show="result">Upload Successful</span> -->
+        <!-- <span ng-show="result">Upload Successful</span> -->
         <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
  
 </div>

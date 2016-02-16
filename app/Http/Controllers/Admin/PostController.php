@@ -55,6 +55,7 @@ class PostController extends AdminController
         $input = $request->all();
         $input['user_id'] = $this->user->id;
         $item = Post::create($input);
+        $item = $this->process_images($item, $input); 
         $item->meta_tag()->create($input);
         $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
         $item->sync_tags($tags_ids);
@@ -89,25 +90,8 @@ class PostController extends AdminController
     public function update(PostRequest $request, $id)
     {
         $input = $request->all();
-
-        // dd($input);
-        // $input['croped_coords']
-
-        foreach ($input['croped_images'] as $key => $image) {
-            $temp_path = public_path("images/{$this->controller_route_path}/temp/{$image}");
-            $ext = File::extension($temp_path);
-            $img_name = 'original.'.$ext;
-            $post_path = public_path("images/{$this->controller_route_path}/{$id}/");
-            $this->add_directory_if_not_exist($post_path);
-            File::move($temp_path, $post_path.$img_name);
-            $input['img_ext'] = File::extension($temp_path);
-        }
-
-
-die;
-
         $item = Post::findOrFail($id);
-        $item->update($input);
+        $item = $this->process_images($item, $input);        
         $item->meta_tag->update($input);
         $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
         $item->sync_tags($tags_ids);
@@ -137,6 +121,29 @@ die;
     {
         return Post::where('title','LIKE', "{$word}%")->get(['id', 'title']);
     }
+
+
+    protected function process_images($item, $input)
+    {
+        $item_path = public_path("images/{$this->controller_route_path}/{$item->id}/");
+        if(isset($input['cropped_images']) && isset($input['cropped_images'][0])) {
+            $image = $input['cropped_images'][0];
+            $temp_path = public_path("images/{$this->controller_route_path}/temp/{$image}");
+            $ext = File::extension($temp_path);
+            $img_name = 'original.'.$ext;
+            $this->add_directory_if_not_exist($item_path);
+            File::move($temp_path, $item_path.$img_name);
+            $item_fields = ['img_ext' => $ext];
+        }
+        if(isset($item_fields)) $item->update($item_fields);
+        if(isset($input['cropped_coords']) && isset($input['cropped_coords'][0])) {
+            $coords = json_decode($input['cropped_coords'][0]);
+            $img_name = 'original.'.$item->img_ext;
+            Image::make($item_path.$img_name)->crop((int) $coords->w, (int) $coords->h, (int) $coords->x, (int) $coords->y)->save($item_path.'cropped_'.$img_name);
+        }
+        return $item;
+    }
+    
 
 
     
