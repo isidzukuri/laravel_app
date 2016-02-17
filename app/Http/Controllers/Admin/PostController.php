@@ -22,6 +22,8 @@ class PostController extends AdminController
 
     protected $controller_route_path = 'post';
 
+    public $img_sizes = [['h'=>500,'w'=>450], ['h'=>225,'w'=>200]];
+
     /**
      * Display a listing of the resource.
      *
@@ -58,7 +60,7 @@ class PostController extends AdminController
         $input = $request->all();
         $input['user_id'] = $this->user->id;
         $item = Post::create($input);
-        $item = $this->process_images($item, $input); 
+        $item = $this->process_images($item, $input, $this->img_sizes); 
         $item->meta_tag()->create($input);
         $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();
         $item->sync_tags($tags_ids);
@@ -94,7 +96,7 @@ class PostController extends AdminController
     {
         $input = $request->all();
         $item = Post::findOrFail($id);
-        $item = $this->process_images($item, $input);  
+        $item = $this->process_images($item, $input, $this->img_sizes);  
         $item->update($input);      
         $item->meta_tag->update($input);
         $tags_ids = isset($input['tags_list']) ? $input['tags_list'] : array();

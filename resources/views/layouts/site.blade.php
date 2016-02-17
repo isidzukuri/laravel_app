@@ -30,7 +30,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="/admin">Home</a></li>
+            <li ><a href="/">Home</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

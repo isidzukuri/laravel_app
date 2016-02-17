@@ -62,6 +62,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/', 'HomeController@index');
+    Route::get('/blog/post/{seo}', 'BlogController@show');
 
     // Route::get('/home', 'HomeController@index');
 });

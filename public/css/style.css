@@ -1,3 +1,10 @@
 .admin_content{
 	padding-top: 80px;
 }
+.post_in_list{
+	margin: 20px 0;
+}
+.post_in_list_description{
+	margin: 0 0 0 10px;
+	width: 400px;
+}

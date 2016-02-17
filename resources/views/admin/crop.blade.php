@@ -24,9 +24,12 @@
         <span ngf-select="upload($file)" ng-model="picFile" accept="image/*" class="btn btn-primary"><% trans("admin.select_picture") %></span>
         <div ng-show="picFile">
           <div class="cropArea pull-left">
-          <!-- aspect-ratio="2" result-image-size='{w: 340,h: 200}' -->
+          <!--  result-image-size='{w: 340,h: 200}' -->
               <img-crop 
                 area-type="rectangle" 
+                @if(isset($aspect_ratio))
+                aspect-ratio="<% $aspect_ratio %>"
+                @endif
                 image="picFile" 
                 result-image="croppedImage" 
                 ng-init="picFile='<% isset($item) && $item->img_ext ? "/images/post/{$item->id}/original.{$item->img_ext}" : '' %>'"

@@ -75,7 +75,7 @@
 					  <div class="form-group">
 					    <label for="inputPassword3" class="col-sm-2 control-label"><% trans("admin.Picture") %></label>
 					    <div class="col-sm-10">
-							@include("admin.crop")
+							@include("admin.crop", ['aspect_ratio'=>0.9])
 					    </div>
 					  </div>
 
