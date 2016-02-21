@@ -29,6 +29,16 @@ class Post extends Model
     }
 
     public static function get_few($limit = 3){
-        return Post::where('published',1)->orderBy('id','desc')->take($limit)->select('id','title','img_ext','description','seo')->get();
+        return self::where('published',1)->orderBy('id','desc')->take($limit)->select('id','title','img_ext','description','seo')->get();
+    }
+
+    public static function get_by_tag_paginator($seo, $limit = 10){
+        return self::whereHas('tags', function ($query) use ($seo){
+                    $query->where('seo',$seo);
+                })->select('id','title','img_ext','description','seo')->paginate($limit);
+    }
+
+    public static function get_all_paginator($limit = 10){
+        return self::where('published',1)->orderBy('id','desc')->select('id','title','img_ext','description','seo')->paginate($limit);
     }
 }
