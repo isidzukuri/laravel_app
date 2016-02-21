@@ -34,5 +34,6 @@ return [
     'email' => 'email',
     'admin' => 'admin',
     'password' => 'password',
-    'logout' => 'logout',
+    'Uploads' => 'Uploads',
+    'upload' => 'upload',
 ];

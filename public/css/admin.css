@@ -45,3 +45,12 @@
     height:350px;
     margin: 20px 20px 20px 0;
 }
+.row_action_column > a{
+	float: right;
+	margin: 0 10px;
+	opacity: 0.5;
+	line-height: 40px;
+}
+.row_action_column a:hover{
+	opacity: 1;
+}

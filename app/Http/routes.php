@@ -83,6 +83,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web
     Route::get('user/autocomplete/{word}', 'UserController@autocomplete');
     Route::resource('user','UserController');
 
+    Route::resource('upload','UploadController');
+
 
     
 });

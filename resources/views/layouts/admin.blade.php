@@ -36,6 +36,7 @@
             <li @if($controller_route_path == 'post')class="active" @endif><a href="/admin/post"><% trans("admin.post") %></a></li>
             <li @if($controller_route_path == 'blog_tag')class="active" @endif><a href="/admin/blog_tag"><% trans("admin.blog_tag") %></a></li>
             <li @if($controller_route_path == 'user')class="active" @endif><a href="/admin/user"><% trans("admin.Users") %></a></li>
+            <li @if($controller_route_path == 'upload')class="active" @endif><a href="/admin/upload"><% trans("admin.Uploads") %></a></li>
           </ul>
 
           <p class="navbar-text navbar-right"><a href="/logout" class="navbar-link"><span class="glyphicon glyphicon-log-out" title='<% trans("admin.logout") %>'></span></a></p>
