@@ -36,4 +36,5 @@ return [
     'password' => 'password',
     'Uploads' => 'Uploads',
     'upload' => 'upload',
+    'complete' => 'complete',
 ];

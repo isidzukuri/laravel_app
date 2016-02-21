@@ -10,14 +10,14 @@
 @section('plain_js')
 	angular_dependencies.push('ngFileUpload');
 	window.admin_data.fileupload_settings = {
-		url: "<% $action_path %>/upload_img_file",
+		url: "<% $action_path %>/upload_file",
 	}
 @append
 
 
 <div ng-controller="FileuploadController">
   <button ngf-select="uploadFiles($files, $invalidFiles)" multiple
-         	accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+         	 ngf-max-height="1000" ngf-max-size="1MB">
      		<% trans("admin.select_files") %>
   </button>
   <br><br>

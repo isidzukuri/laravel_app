@@ -84,6 +84,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['web
     Route::resource('user','UserController');
 
     Route::resource('upload','UploadController');
+    Route::post('upload/upload_file', 'UploadController@upload_file');
+
 
 
     

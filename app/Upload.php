@@ -20,6 +20,7 @@ class Upload
         return $data;
     }
 
+
     public static function get_all_files_pathes(){
         $data = array();
         foreach (self::$upload_dirs as $dir) {
@@ -40,6 +41,11 @@ class Upload
             'kb' => File::size($public_path)/1024,
         );
         return $data;
+    }
+
+
+    public static function delete_file($full_filename){
+        return File::delete($full_filename);
     }
 
 }
